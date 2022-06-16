@@ -47,9 +47,11 @@ public class ProcessServiceDefinitionsAction implements Action<Task> {
           String dependencyName = dependency.getName();
           String serviceName = dependencyName.split("-")[0];
           System.out.println("Generating Java client for " + serviceName);
-          String serviceDefinitionFile = rootDir + "/gen/main/resources/" + serviceName + ".yaml";
+          String serviceDefinitionDirectory = rootDir + "/gen/main/resources/";
+          String serviceDefinitionFile = serviceDefinitionDirectory + serviceName + ".yaml";
           String serviceClientDirectory =
               rootDir + "/gen/main/java/io/service84/clients/" + serviceName;
+          project.mkdir(serviceDefinitionDirectory);
           project.delete(serviceDefinitionFile);
           project.delete(serviceClientDirectory);
           PatternFilterable pattern = new PatternSet();
